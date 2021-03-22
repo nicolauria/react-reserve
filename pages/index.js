@@ -1,20 +1,22 @@
 import React from 'react'
 import axios from 'axios'
 
-function Home() {
-  // used any time we want to perform a side effect (functional programming)
-  React.useEffect(() => {
-    getProducts()
-  }, [])
-
-  async function getProducts() {
-    // both the frontend and the backend run on the same port (we avoid cors errors)
-    const url = 'http://localhost:3000/api/products'
-    const response = await axios.get(url)
-    console.log(response.data)
-  }
+function Home({ products }) {
+  console.log(products)
 
   return <>home</>;
+}
+
+// with nextjs we have the option to fetch data on the server
+// this data will be merged with existing props
+Home.getInitialProps = async () => {
+  // both the frontend and the backend run on the same port (we avoid cors errors)
+  const url = 'http://localhost:3000/api/products'
+  const response = await axios.get(url)
+
+  return {
+    products: response.data
+  }
 }
 
 export default Home;
