@@ -1,10 +1,9 @@
 import React from 'react'
 import axios from 'axios'
+import ProductList from '../components/Index/ProductList'
 
 function Home({ products }) {
-  console.log(products)
-
-  return <>home</>;
+  return <ProductList products={products} />;
 }
 
 // with nextjs we have the option to fetch data on the server
